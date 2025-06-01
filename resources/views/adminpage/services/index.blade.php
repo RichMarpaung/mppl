@@ -26,11 +26,11 @@
                 <td>{{ $service->harga }}</td>
                 <td>
                   <!-- Eye Icon (Deskripsi) -->
-                  <a href="javascript:void(0)"
-                     class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center btn-show-desc"
-                     data-deskripsi="{{ $service->deskripsi }}">
-                    <iconify-icon icon="iconamoon:eye-light"></iconify-icon>
-                  </a>
+             <a href="javascript:void(0)"
+   class="w-32-px h-32-px bg-primary-light text-primary-600 rounded-circle d-inline-flex align-items-center justify-content-center btn-show-desc"
+   data-deskripsi="{{ $service->deskripsi }}">
+   <iconify-icon icon="mdi:eye-outline" class="text-primary"></iconify-icon>
+</a>
 
                   <!-- Edit Icon -->
                   <a href="{{ route('admin.services.edit', $service->id) }}"
@@ -77,7 +77,10 @@
 @push('scripts')
 <script>
   $(document).ready(function() {
-    $('.btn-show-desc').on('click', function() {
+    $('#dataTable').DataTable(); // Inisialisasi DataTables
+
+    // Event delegation untuk tombol deskripsi
+    $(document).on('click', '.btn-show-desc', function() {
       var deskripsi = $(this).data('deskripsi');
       $('#modalDeskripsi').text(deskripsi);
       $('#descModal').modal('show');

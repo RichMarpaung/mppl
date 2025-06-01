@@ -77,4 +77,5 @@
             <button type="submit" class="btn btn-primary mt-3">Kirim Lamaran</button>
         </form>
     </div>
+
 @endsection

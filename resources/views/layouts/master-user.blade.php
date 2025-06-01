@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Tanniewa Putra - @yield('title')</title>
@@ -75,11 +76,12 @@
                             <li><a href="#team">Tim</a></li>
                         </ul>
                     </li>
-                    <li><a href="#services">Layanan</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#team">Karir</a></li>
+                    {{-- <li><a href="/#portfolio">Portfolio</a></li> --}}
+                    <li><a href="/#testimoni">Testimoni</a></li>
+                    <li><a href="/#lowongan">Lowongan</a></li>
+                    <li><a href="/#layanan">Layanan</a></li>
 
-                    <li class="dropdown"><a href="#"><span>Lainnya</span> <i
+                    {{-- <li class="dropdown"><a href="#"><span>Lainnya</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="#">Dropdown 1</a></li>
@@ -97,14 +99,15 @@
                             <li><a href="#">Dropdown 3</a></li>
                             <li><a href="#">Dropdown 4</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     {{-- <li><a href="#contact">Contact</a></li> --}}
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="#about">Pesan</a>
-
+<a class="btn-getstarted" href="{{ auth()->check() ? '/orders' : route('login') }}">
+    {{ auth()->check() ? 'Pesan' : 'Login' }}
+</a>
         </div>
     </header>
 
@@ -113,9 +116,9 @@
 
 
     <div class="container copyright text-center mt-4">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">Techie</strong> <span>All Rights Reserved</span></p>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Tanniewa Putra</strong> <span>All Rights Reserved</span></p>
         <div class="credits">
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Designed by <a href="https://bootstrapmade.com/">KELOMPOK 1</a>
         </div>
     </div>
 

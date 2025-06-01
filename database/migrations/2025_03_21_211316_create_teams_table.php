@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('ktp', 50)->nullable();
-            $table->string('npwp', 50)->nullable();
-            $table->string('ijazah', 255)->nullable();
-
-            $table->string('image', 50)->nullable();
-            $table->string('cv', 50)->nullable();
-            $table->string('posisi',50);
+            $table->string('ktp')->nullable();
+            $table->string('npwp')->nullable();
+            $table->string('ijazah')->nullable();
+            $table->string('image')->nullable();
+            $table->string('cv')->nullable();
+            $table->string('posisi');
             $table->enum('status', ['Tetap', 'freelance']);
             $table->timestamps();
         });

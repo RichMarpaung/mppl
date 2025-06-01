@@ -36,10 +36,11 @@ use Illuminate\Support\Facades\Route;
 //     });
 
 // });
-Route::get('/', function () {
-            return view('userpage.index');
-        });
+Route::get('/', [UserPageController::class, 'dashboard'])->name('dashboard.page');
+
+Route::get('/orders/create/{service}', [OrderController::class, 'create'])->name('user.orders.create');
 Route::middleware('auth')->group(function () {
+    Route::post('/orders', [OrderController::class, 'store'])->name('user.orders.store');
     Route::get('/profile', function () {
         return view('userpage.test');
     })->middleware('verified');
@@ -62,12 +63,12 @@ Route::middleware('guest')->group(function () {
     Route::get('/forgot-password', function () {
         return view('auth.forgot-password');
     })->name('password.request');
-    Route::post('/forgot-password', [AuthContoller::class,'forgotpassword'])->middleware('guest')->name('password.email');
+    Route::post('/forgot-password', [AuthContoller::class, 'forgotpassword'])->middleware('guest')->name('password.email');
 
     Route::get('/reset-password/{token}', function (string $token) {
         return view('auth.reset-password', ['token' => $token]);
     })->middleware('guest')->name('password.reset');
-    Route::post('/reset-password',[AuthContoller::class,'resetpassword'])->middleware('guest')->name('password.update');
+    Route::post('/reset-password', [AuthContoller::class, 'resetpassword'])->middleware('guest')->name('password.update');
     // end password reset
 });
 
@@ -97,18 +98,24 @@ Route::middleware(['auth', MustAdmin::class])->prefix('admin')->name('admin.')->
     Route::resource('services', ServiceController::class);
     Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
+    Route::put('admin/orders/{order}', [OrderController::class, 'update'])->name('admin.orders.update');
     Route::resource('portofolios', PortofolioController::class);
     Route::resource('teams', TeamController::class);
     Route::resource('tasks', TaskController::class);
     Route::resource('pelamars', PelamarController::class);
     Route::resource('lowongans', LowonganController::class);
     Route::resource('documents', DocumentController::class);
+     Route::get('/profile', [UserPageController::class, 'adminProfile'])->name('profile');
+    Route::put('/profile', [UserPageController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/profile/photo', [UserPageController::class, 'updatePhoto'])->name('profile.updatePhoto');
+    Route::put('/profile/password', [UserPageController::class, 'updatePassword'])->name('profile.updatePassword');
 });
 // end admin routes
 
 //user routes
 Route::middleware('auth')->group(function () {
-    Route::get('/lowongan', [UserPageController::class, 'lowongan'])->name('user.lowongans.index');
+
+    Route::put('/profile/photo', [UserPageController::class, 'updatePhoto'])->name('user.profile.updatePhoto');
     Route::get('/profile', [UserPageController::class, 'profile'])->name('user.profile');
     Route::get('/pelamar/create/{lowongan}', [PelamarController::class, 'create'])->name('user.pelamars.create');
     Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('user.pelamars.store');

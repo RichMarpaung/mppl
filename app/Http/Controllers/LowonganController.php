@@ -51,7 +51,7 @@ class LowonganController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('admin.lowongans.index')->with('success', 'Lowongan created successfully.');
+        return redirect()->route('dashboard.page')->with('success', 'Lowongan created successfully.');
     }
 
     /**
