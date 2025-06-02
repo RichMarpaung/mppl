@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('ijazah')->nullable();
             $table->string('image')->nullable();
             $table->string('cv')->nullable();
+            $table->string('pengalaman')->nullable();
             $table->string('posisi');
             $table->enum('status', ['Tetap', 'freelance']);
             $table->timestamps();

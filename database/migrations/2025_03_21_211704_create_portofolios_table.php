@@ -15,6 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('nama', 50);
 
+            $table->string('mitra');
+            $table->string('lokasi');
+            $table->date('waktu');
+            $table->string('image_mitra')->nullable();
+            $table->string('image')->nullable();
+            $table->string('link')->nullable();
             $table->text('detail');
 
             $table->timestamps();

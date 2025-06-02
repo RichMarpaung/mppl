@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthContoller;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\LowonganController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PelamarController;
 use App\Http\Controllers\PortofolioController;
@@ -36,18 +37,16 @@ use Illuminate\Support\Facades\Route;
 //     });
 
 // });
+Route::get('/news', [NewsController::class, 'userIndex'])->name('news.user.index');
 Route::get('/', [UserPageController::class, 'dashboard'])->name('dashboard.page');
 
 Route::get('/orders/create/{service}', [OrderController::class, 'create'])->name('user.orders.create');
 Route::middleware('auth')->group(function () {
-    Route::post('/orders', [OrderController::class, 'store'])->name('user.orders.store');
-    Route::get('/profile', function () {
-        return view('userpage.test');
-    })->middleware('verified');
+
     Route::get('/home', function () {
         return view('userpage.home');
     });
-    Route::post('/logout', [AuthContoller::class, 'logout'])->name('logout');
+
 });
 
 Route::post('/logout', [AuthContoller::class, 'logout'])->name('logout');
@@ -95,6 +94,8 @@ Route::middleware(['auth', MustAdmin::class])->prefix('admin')->name('admin.')->
     Route::get('/', function () {
         return view('adminpage.dashboard');
     })->name('admin.dashboard');
+    Route::resource('news', NewsController::class);
+    Route::resource('portofolios', PortofolioController::class);
     Route::resource('services', ServiceController::class);
     Route::resource('users', UserController::class);
     Route::resource('orders', OrderController::class);
@@ -114,9 +115,11 @@ Route::middleware(['auth', MustAdmin::class])->prefix('admin')->name('admin.')->
 
 //user routes
 Route::middleware('auth')->group(function () {
+    Route::post('/orders', [OrderController::class, 'store'])->name('user.orders.store');
 
     Route::put('/profile/photo', [UserPageController::class, 'updatePhoto'])->name('user.profile.updatePhoto');
     Route::get('/profile', [UserPageController::class, 'profile'])->name('user.profile');
     Route::get('/pelamar/create/{lowongan}', [PelamarController::class, 'create'])->name('user.pelamars.create');
     Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('user.pelamars.store');
+     Route::post('/logout', [AuthContoller::class, 'logout'])->name('logout');
 });

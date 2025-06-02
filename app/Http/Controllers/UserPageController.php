@@ -25,7 +25,8 @@ public function dashboard()
         $services = Service::all();
         $teams=Team::all();
         $lowongans = Lowongan::where('status', 'dibuka')->get();
-        return view('userpage.index', compact('teams','lowongans', 'services'));
+        $portofolios = \App\Models\Portofolio::latest()->get();
+return view('userpage.index', compact('teams', 'lowongans', 'services', 'portofolios'));
     }
 
     /**
@@ -38,8 +39,11 @@ public function dashboard()
     public function profile()
     {
         $orders = \App\Models\Order::where('user_id', Auth::id())->get();
-$lowongans = \App\Models\Lowongan::all();
-return view('userpage.profile', compact('orders', 'lowongans'));
+$pelamarans = \App\Models\Pelamar::with('lowongan')
+    ->where('user_id', Auth::id())
+    ->get();
+
+return view('userpage.profile', compact('orders', 'pelamarans'));
     }
 public function updateProfile(Request $request)
 {

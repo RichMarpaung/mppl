@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->timestamp('tanggal_mulai')->nullable();
             $table->timestamp('tanggal_selesai')->nullable();
+            $table->String('file')->nullable();
             $table->enum('status', ['pending', 'in_progress', 'completed', 'canceled']);
             $table->timestamps();
         });

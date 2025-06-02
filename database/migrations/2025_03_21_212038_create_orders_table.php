@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->timestamp('tanggal_pemesanan')->useCurrent();
+            $table->text('custom_request')->nullable();
             $table->string('srs')->nullable();
             $table->enum('status', ['pending', 'diproses', 'selesai', 'canceled']);
             $table->timestamps();

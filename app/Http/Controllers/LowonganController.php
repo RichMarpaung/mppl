@@ -13,8 +13,12 @@ class LowonganController extends Controller
      */
     public function index()
     {
-        $lowongans = Lowongan::all();
-        return view('adminpage.lowongan.index', compact('lowongans'));
+        Lowongan::where('status', 'dibuka')
+        ->where('tanggal_ditutup', '<', now())
+        ->update(['status' => 'ditutup']);
+
+    $lowongans = Lowongan::all();
+    return view('adminpage.lowongan.index', compact('lowongans'));
     }
         /**
      * Show the form for creating a new resource.
@@ -51,7 +55,7 @@ class LowonganController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('dashboard.page')->with('success', 'Lowongan created successfully.');
+        return redirect()->route('admin.lowongans.index')->with('success', 'Lowongan created successfully.');
     }
 
     /**

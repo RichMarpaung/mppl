@@ -77,9 +77,10 @@
                         </ul>
                     </li>
                     {{-- <li><a href="/#portfolio">Portfolio</a></li> --}}
-                    <li><a href="/#testimoni">Testimoni</a></li>
+                    <li><a href="/#portofolio">Portofolio</a></li>
                     <li><a href="/#lowongan">Lowongan</a></li>
                     <li><a href="/#layanan">Layanan</a></li>
+                    <li><a href="/news">Berita</a></li>
 
                     {{-- <li class="dropdown"><a href="#"><span>Lainnya</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>

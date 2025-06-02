@@ -100,37 +100,40 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body p-24">
-                    <h5 class="mb-3">Lowongan</h5>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Judul</th>
-                                    <th>Status</th>
-                                    <th>Deadline</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($lowongans as $lowongan)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $lowongan->judul }}</td>
-                                        <td>{{ ucfirst($lowongan->status) }}</td>
-                                        <td>{{ $lowongan->deadline ? \Carbon\Carbon::parse($lowongan->deadline)->format('d-m-Y') : '-' }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="4" class="text-center">Belum ada lowongan.</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <h5 class="mb-3">Lowongan yang Diikuti</h5>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Judul</th>
+                <th>Status Lowongan</th>
+                <th>Status Pendaftaran</th>
+                <th>Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($pelamarans as $pelamar)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $pelamar->lowongan->nama ?? '-' }}</td>
+                    <td>{{ ucfirst($pelamar->lowongan->status ?? '-') }}</td>
+                    <td>
+                        {{ ucfirst($pelamar->status ?? '-') }}
+                        {{-- contoh: status pelamaran: diterima, diproses, ditolak --}}
+                    </td>
+                    <td>
+                        {{ $pelamar->lowongan->deadline ? \Carbon\Carbon::parse($pelamar->lowongan->deadline)->format('d-m-Y') : '-' }}
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center">Belum ada lowongan yang didaftar.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
         </div>
     </div>
 
