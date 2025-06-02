@@ -106,8 +106,8 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-<a class="btn-getstarted" href="{{ auth()->check() ? '/orders' : route('login') }}">
-    {{ auth()->check() ? 'Pesan' : 'Login' }}
+<a class="btn-getstarted" href="{{ auth()->check() ? '/profile' : route('login') }}">
+    {{ auth()->check() ? 'Profile' : 'Login' }}
 </a>
         </div>
     </header>
