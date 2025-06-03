@@ -68,24 +68,24 @@
                         <span>Manage Order</span>
                     </a>
                 </li>
-                {{-- <li>
-        <a href="{{ route('admin.portofolios.index') }}">
-            <i class="ri-news-line text-xl me-14 d-flex w-auto"></i>
-          <span>Manage Portofolios</span>
-        </a>
-      </li> --}}
+                <li>
+                    <a href="{{ route('admin.portofolios.index') }}">
+                        <i class="ri-news-line text-xl me-14 d-flex w-auto"></i>
+                        <span>Manage Portofolios</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('admin.teams.index') }}">
                         <iconify-icon icon="flowbite:users-group-outline" class="menu-icon"></iconify-icon>
                         <span>Manage Team</span>
                     </a>
                 </li>
-                {{-- <li>
-        <a href="{{ route('admin.tasks.index') }}">
+                <li>
+        <a href="{{ route('admin.news.index') }}">
           <iconify-icon icon="bi:chat-dots" class="menu-icon"></iconify-icon>
-          <span>Manage Task</span>
+          <span>Manage News</span>
         </a>
-      </li> --}}
+      </li>
 
                 <li>
                     <a href="{{ route('admin.lowongans.index') }}">
@@ -241,7 +241,7 @@
     <!-- file upload js -->
     <script src="{{ asset('assets/js/lib/file-upload.js') }}"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- main js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script>

@@ -52,6 +52,7 @@ class TeamController extends Controller
         'user_id' => 'required|exists:users,id',
         'posisi' => 'required|string|max:50',
         'status' => 'required|in:Tetap,freelance',
+        'pengalaman' => 'nullable|string|max:255',
         'ktp' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         'npwp' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         'ijazah' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -66,11 +67,17 @@ class TeamController extends Controller
     $cvPath = $request->file('cv') ? $request->file('cv')->store('uploads/cv', 'public') : null;
     $imagePath = $request->file('image') ? $request->file('image')->store('uploads/image', 'public') : null;
 
+    // Ubah role user menjadi 3
+    $user = User::findOrFail($validated['user_id']);
+    $user->role_id = 3;
+    $user->save();
+
     // Simpan data tim baru
     Team::create([
         'user_id' => $validated['user_id'],
         'posisi' => $validated['posisi'],
         'status' => $validated['status'],
+        'pengalaman' => $validated['pengalaman'] ?? null,
         'ktp' => $ktpPath,
         'npwp' => $npwpPath,
         'ijazah' => $ijazahPath,
@@ -110,6 +117,7 @@ class TeamController extends Controller
         'user_id' => 'required|exists:users,id',
         'posisi' => 'required|string|max:50',
         'status' => 'required|in:Tetap,freelance',
+        'pengalaman'=> 'nullable|string|max:255',
         'ktp' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         'npwp' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         'ijazah' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',

@@ -160,6 +160,7 @@
                             </div>
                         </div><!-- End Team Member -->
                     @endforeach
+<<<<<<< HEAD
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                         <div class="team-member">
                             <div class="member-img">
@@ -179,66 +180,10 @@
         {{--   </div>
                         </div>
                     </div><!-- End Team Member -->
+=======
+>>>>>>> 2030b8ef96b932b5d2522a6ab437a81880df1567
 
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Sarah Jhonson</h4>
-                                <span>Product Manager</span>
-                                <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit
-                                    corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
 
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>William Anderson</h4>
-                                <span>CTO</span>
-                                <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates
-                                    enim aut architecto porro aspernatur molestiae modi.</p>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
-
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Amanda Jepson</h4>
-                                <span>Accountant</span>
-                                <p>Rerum voluptate non adipisci animi distinctio et deserunt amet voluptas. Quia aut aliquid
-                                    doloremque ut possimus ipsum officia.</p>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
 
                 </div>
 
@@ -481,7 +426,7 @@
         </section><!-- /Features Section -->
 
         <!-- Testimonials Section -->
-        <section id="testimoni" class="testimonials section light-background">
+        {{-- <section id="testimoni" class="testimonials section light-background">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -606,8 +551,50 @@
 
             </div>
 
-        </section><!-- /Testimonials Section -->
+        </section><!-- /Testimonials Section --> --}}
+<section id="portofolio" class="portfolio section light-background">
 
+
+   {{-- ...existing code... --}}
+<section id="portofolio" class="portfolio section light-background">
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Portofolio</h2>
+        <p>Beberapa hasil karya dan proyek yang telah kami selesaikan.</p>
+    </div>
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4">
+            @forelse($portofolios as $portofolio)
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 shadow-sm position-relative">
+                        {{-- Bulatan gambar mitra di pojok kiri atas --}}
+                        @if($portofolio->image_mitra)
+                            <img src="{{ Storage::url($portofolio->image_mitra) }}"
+                                 alt="Mitra"
+                                 class="position-absolute rounded-circle border border-white"
+                                 style="width:60px;height:60px;object-fit:cover;top:16px;left:16px;z-index:2;background:#fff;">
+                        @endif
+                        @if($portofolio->image)
+                            <img src="{{ Storage::url($portofolio->image) }}" class="card-img-top" alt="Gambar Portofolio">
+                        @endif
+                        <div class="card-body" style="margin-top: 30px;">
+                            <h5 class="card-title">{{ $portofolio->nama }}</h5>
+                            <p class="card-text">{{ Str::limit($portofolio->detail, 100) }}</p>
+                            <p class="mb-1"><strong>Mitra:</strong> {{ $portofolio->mitra }}</p>
+                            <p class="mb-1"><strong>Lokasi:</strong> {{ $portofolio->lokasi }}</p>
+                            <p class="mb-1"><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($portofolio->waktu)->format('d-m-Y') }}</p>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-12">
+                    <p class="text-center text-muted">Belum ada portofolio yang ditampilkan.</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+{{-- ...existing code... --}}
+</section>
         <!-- Lowongan Section -->
         <section id="lowongan" class="portfolio section">
 

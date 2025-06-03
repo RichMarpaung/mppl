@@ -25,7 +25,12 @@ class UserPageController extends Controller
         $services = Service::all();
         $teams = Team::all();
         $lowongans = Lowongan::where('status', 'dibuka')->get();
+<<<<<<< HEAD
         return view('userpage.index', compact('teams', 'lowongans', 'services'));
+=======
+        $portofolios = \App\Models\Portofolio::latest()->get();
+return view('userpage.index', compact('teams', 'lowongans', 'services', 'portofolios'));
+>>>>>>> 2030b8ef96b932b5d2522a6ab437a81880df1567
     }
 
     /**
@@ -38,8 +43,16 @@ class UserPageController extends Controller
     public function profile()
     {
         $orders = \App\Models\Order::where('user_id', Auth::id())->get();
+<<<<<<< HEAD
         $lowongans = \App\Models\Lowongan::all();
         return view('userpage.profile', compact('orders', 'lowongans'));
+=======
+$pelamarans = \App\Models\Pelamar::with('lowongan')
+    ->where('user_id', Auth::id())
+    ->get();
+
+return view('userpage.profile', compact('orders', 'pelamarans'));
+>>>>>>> 2030b8ef96b932b5d2522a6ab437a81880df1567
     }
     public function updateProfile(Request $request)
     {
