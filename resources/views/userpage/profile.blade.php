@@ -1,6 +1,6 @@
-@extends('layouts.master-user')
+@extends('layouts.dash-user')
 
-@section('judul', 'Profil Saya')
+@section('title', 'Profile')
 
 @section('content')
     <div class="row gy-4">
@@ -57,11 +57,13 @@
                             </li>
                             <li class="d-flex align-items-center gap-1 mb-12">
                                 <span class="w-30 text-md fw-semibold text-primary-light">Address</span>
-                                <span class="w-70 text-secondary-light fw-medium">: {{ Auth::user()->address ?? '-' }}</span>
+                                <span class="w-70 text-secondary-light fw-medium">:
+                                    {{ Auth::user()->address ?? '-' }}</span>
                             </li>
                             <li class="d-flex align-items-center gap-1 mb-12">
                                 <span class="w-30 text-md fw-semibold text-primary-light">Role</span>
-                                <span class="w-70 text-secondary-light fw-medium">: {{ Auth::user()->role->name ?? '-' }}</span>
+                                <span class="w-70 text-secondary-light fw-medium">:
+                                    {{ Auth::user()->role->name ?? '-' }}</span>
                             </li>
                         </ul>
                     </div>
@@ -119,7 +121,8 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $lowongan->judul }}</td>
                                         <td>{{ ucfirst($lowongan->status) }}</td>
-                                        <td>{{ $lowongan->deadline ? \Carbon\Carbon::parse($lowongan->deadline)->format('d-m-Y') : '-' }}</td>
+                                        <td>{{ $lowongan->deadline ? \Carbon\Carbon::parse($lowongan->deadline)->format('d-m-Y') : '-' }}
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>

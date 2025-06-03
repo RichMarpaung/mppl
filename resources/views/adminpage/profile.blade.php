@@ -11,29 +11,29 @@
                 <div class="pb-24 ms-16 mb-24 me-16  mt--100">
                     <div class="text-center border border-top-0 border-start-0 border-end-0">
                         <div class="d-flex flex-column align-items-center justify-content-center">
-    <!-- Foto Profil + Tombol Kamera -->
-    <div class="position-relative" style="width: 200px; height: 200px;">
-        <img src="{{ Auth::user()->photo ? asset('storage/' . Auth::user()->photo) : asset('assets/images/avatardefault.webp') }}"
-             alt="Foto Profil"
-             class="border br-white border-width-2-px w-100 h-100 rounded-circle object-fit-cover">
+                            <!-- Foto Profil + Tombol Kamera -->
+                            <div class="position-relative" style="width: 200px; height: 200px;">
+                                <img src="{{ Auth::user()->photo ? asset('storage/' . Auth::user()->photo) : asset('assets/images/avatardefault.webp') }}"
+                                    alt="Foto Profil"
+                                    class="border br-white border-width-2-px w-100 h-100 rounded-circle object-fit-cover">
 
-        <!-- Tombol edit di pojok kanan bawah -->
-        <div class="position-absolute" style="bottom: 0; right: 0;">
-            <form action="{{ route('admin.profile.updatePhoto') }}" method="POST"
-                  enctype="multipart/form-data" id="photoForm">
-                @csrf
-                @method('PUT')
-                <input type="file" id="imageUpload" name="photo" accept=".png, .jpg, .jpeg" hidden
-                       onchange="document.getElementById('photoForm').submit();">
-                <label for="imageUpload"
-                       class="d-flex align-items-center justify-content-center bg-dark text-white rounded-circle shadow"
-                       style="width: 40px; height: 40px; cursor: pointer;">
-                    <iconify-icon icon="solar:camera-outline" class="icon"></iconify-icon>
-                </label>
-            </form>
-        </div>
-    </div>
-</div>
+                                <!-- Tombol edit di pojok kanan bawah -->
+                                <div class="position-absolute" style="bottom: 0; right: 0;">
+                                    <form action="{{ route('admin.profile.updatePhoto') }}" method="POST"
+                                        enctype="multipart/form-data" id="photoForm">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="file" id="imageUpload" name="photo" accept=".png, .jpg, .jpeg"
+                                            hidden onchange="document.getElementById('photoForm').submit();">
+                                        <label for="imageUpload"
+                                            class="d-flex align-items-center justify-content-center bg-dark text-white rounded-circle shadow"
+                                            style="width: 40px; height: 40px; cursor: pointer;">
+                                            <iconify-icon icon="solar:camera-outline" class="icon"></iconify-icon>
+                                        </label>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         {{-- <img src="{{ Auth::user()->photo ? asset('storage/' . Auth::user()->photo) : asset('assets/images/avatardefault.webp') }}"
                             alt="Foto Profil"
                             class="border br-white border-width-2-px w-200-px h-200-px rounded-circle object-fit-cover"> --}}
