@@ -55,7 +55,7 @@
             <iconify-icon icon="radix-icons:cross-2"></iconify-icon>
         </button>
         <div>
-            <a href="#" class="sidebar-logo">
+            <a href="/" class="sidebar-logo">
                 <img src="{{ asset('assets/images/logo3.png') }}" alt="site logo" class="light-logo">
                 <img src="{{ asset('assets/images/logo3.png') }}" alt="site logo" class="dark-logo">
                 <img src="{{ asset('assets/images/logo3.png') }}" alt="site logo" class="logo-icon">
