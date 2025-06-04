@@ -126,71 +126,6 @@
         </section>
         <!-- /Services Section -->
 
-        <!-- Team Section -->
-        {{-- <section id="team" class="team section">
-
-            <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
-                <h2>Team</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-            </div><!-- End Section Title -->
-
-            <div class="container">
-
-                <div class="row gy-4">
-                    @foreach ($teams as $team)
-                        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                            <div class="team-member">
-                                <div class="member-img">
-
-                                    <img src="{{asset('storage/' . $team->image) }}" class="img-fluid" alt="">
-                                    <div class="social">
-                                        <a href=""><i class="bi bi-twitter-x"></i></a>
-                                        <a href=""><i class="bi bi-facebook"></i></a>
-                                        <a href=""><i class="bi bi-instagram"></i></a>
-                                        <a href=""><i class="bi bi-linkedin"></i></a>
-                                    </div>
-                                </div>
-                                <div class="member-info">
-                                    <h4>{{ $team->user->name }}</h4>
-                                    <span>{{ $team->posisi }}</span>
-                                    {{-- <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum
-                                    exercitationem iure minima enim corporis et voluptate.</p> --}}
-        {{--    </div>
-                            </div>
-                        </div><!-- End Team Member -->
-                    @endforeach
-<<<<<<< HEAD
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Jaharuddin, S.Kom.,MM</h4>
-                                <span>Manager Operasional</span>
-                                {{-- <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum
-                                    exercitationem iure minima enim corporis et voluptate.</p> --}}
-        {{--   </div>
-                        </div>
-                    </div><!-- End Team Member -->
-=======
->>>>>>> 2030b8ef96b932b5d2522a6ab437a81880df1567
-
-
-
-                </div>
-
-            </div>
-
-        </section> --}}
-
         <section id="team" class="team section testimonials section light-background">
 
             <!-- Section Title -->
@@ -552,57 +487,59 @@
             </div>
 
         </section><!-- /Testimonials Section --> --}}
-<section id="portofolio" class="portfolio section light-background">
+        <section id="portofolio" class="portfolio section light-background">
 
 
-   {{-- ...existing code... --}}
-<section id="portofolio" class="portfolio section light-background">
-    <div class="container section-title" data-aos="fade-up">
-        <h2>Portofolio</h2>
-        <p>Beberapa hasil karya dan proyek yang telah kami selesaikan.</p>
-    </div>
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4">
-            @forelse($portofolios as $portofolio)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-sm position-relative">
-                        {{-- Bulatan gambar mitra di pojok kiri atas --}}
-                        @if($portofolio->image_mitra)
-                            <img src="{{ Storage::url($portofolio->image_mitra) }}"
-                                 alt="Mitra"
-                                 class="position-absolute rounded-circle border border-white"
-                                 style="width:60px;height:60px;object-fit:cover;top:16px;left:16px;z-index:2;background:#fff;">
-                        @endif
-                        @if($portofolio->image)
-                            <img src="{{ Storage::url($portofolio->image) }}" class="card-img-top" alt="Gambar Portofolio">
-                        @endif
-                        <div class="card-body" style="margin-top: 30px;">
-                            <h5 class="card-title">{{ $portofolio->nama }}</h5>
-                            <p class="card-text">{{ Str::limit($portofolio->detail, 100) }}</p>
-                            <p class="mb-1"><strong>Mitra:</strong> {{ $portofolio->mitra }}</p>
-                            <p class="mb-1"><strong>Lokasi:</strong> {{ $portofolio->lokasi }}</p>
-                            <p class="mb-1"><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($portofolio->waktu)->format('d-m-Y') }}</p>
-                        </div>
+            {{-- ...existing code... --}}
+            <section id="portofolio" class="portfolio section light-background">
+                <div class="container section-title" data-aos="fade-up">
+                    <h2>Portofolio</h2>
+                    <p>Beberapa hasil karya dan proyek yang telah kami selesaikan.</p>
+                </div>
+                <div class="container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="row gy-4">
+                        @forelse($portofolios as $portofolio)
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card h-100 shadow-sm position-relative">
+                                    {{-- Bulatan gambar mitra di pojok kiri atas --}}
+                                    @if ($portofolio->image_mitra)
+                                        <img src="{{ Storage::url($portofolio->image_mitra) }}" alt="Mitra"
+                                            class="position-absolute rounded-circle border border-white"
+                                            style="width:60px;height:60px;object-fit:cover;top:16px;left:16px;z-index:2;background:#fff;">
+                                    @endif
+                                    @if ($portofolio->image)
+                                        <img src="{{ Storage::url($portofolio->image) }}" class="card-img-top"
+                                            alt="Gambar Portofolio">
+                                    @endif
+                                    <div class="card-body" style="margin-top: 30px;">
+                                        <h5 class="card-title">{{ $portofolio->nama }}</h5>
+                                        <p class="card-text">{{ Str::limit($portofolio->detail, 100) }}</p>
+                                        <p class="mb-1"><strong>Mitra:</strong> {{ $portofolio->mitra }}</p>
+                                        <p class="mb-1"><strong>Lokasi:</strong> {{ $portofolio->lokasi }}</p>
+                                        <p class="mb-1"><strong>Tanggal:</strong>
+                                            {{ \Carbon\Carbon::parse($portofolio->waktu)->format('d-m-Y') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="col-12">
+                                <p class="text-center text-muted">Belum ada portofolio yang ditampilkan.</p>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
-            @empty
-                <div class="col-12">
-                    <p class="text-center text-muted">Belum ada portofolio yang ditampilkan.</p>
-                </div>
-            @endforelse
-        </div>
-    </div>
-</section>
-{{-- ...existing code... --}}
-</section>
+            </section>
+            {{-- ...existing code... --}}
+        </section>
         <!-- Lowongan Section -->
         <section id="lowongan" class="portfolio section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Lowongan</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                <p>Kami menyediakan berbagai lowongan pekerjaan untuk Anda yang ingin bergabung bersama kami.</p>
             </div><!-- End Section Title -->
+
 
             <div class="container">
 
@@ -637,30 +574,36 @@
                         <!-- Modal -->
                         <div class="modal fade" id="lowonganModal" tabindex="-1" aria-labelledby="lowonganModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="lowonganModalLabel">Detail Lowongan</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content shadow-lg rounded-4 border-0">
+                                    <div class="modal-header text-white rounded-top-4" style="background-color: #b60d22">
+                                        <h5 class="modal-title text-white fw-bold" id="lowonganModalLabel">Detail Lowongan
+                                        </h5>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        <h4 id="modalNama"></h4>
-                                        <p><strong>Deskripsi:</strong> <span id="modalDeskripsi"></span></p>
-                                        <p><strong>Kualifikasi:</strong> <span id="modalKualifikasi"></span></p>
-                                        <p><strong>Gaji:</strong> <span id="modalGaji"></span></p>
-                                        <p><strong>Tanggal Ditutup:</strong> <span id="modalTanggalDitutup"></span>
-                                        </p>
-                                        <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+                                    <div class="modal-body p-4">
+                                        <h4 class="fw-semibold mb-3" id="modalNama"></h4>
+                                        <p><strong>Deskripsi:</strong><br><span id="modalDeskripsi"></span></p>
+                                        <hr>
+                                        <p><strong>Kualifikasi:</strong><br><span id="modalKualifikasi"></span></p>
+                                        <hr>
+                                        <p><strong>Gaji:</strong> <span class=" fw-medium" id="modalGaji"></span></p>
+                                        <hr>
+                                        <p><strong>Tanggal Ditutup:</strong> <span id="modalTanggalDitutup"></span></p>
+                                        <hr>
+                                        <p><strong>Status:</strong> <span id="modalStatus"
+                                                class="badge bg-success text-white"></span></p>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
+                                    <div class="modal-footer justify-content-between px-4 pb-4">
+                                        <button type="button" class="btn btn-outline-secondary"
                                             data-bs-dismiss="modal">Tutup</button>
-                                        <a href="#" id="modalLamarLink" class="btn btn-primary">Lamar</a>
+                                        <a href="#" id="modalLamarLink" class="btn btn-danger">Lamar</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
 
 
@@ -721,14 +664,14 @@
                                         <div class="form-group mb-3">
                                             <label for="nama">Nama Lengkap:</label>
                                             <input type="text" name="nama" id="nama" class="form-control"
-                                                value="{{ auth()->user()->name ?? '' }}" readonly>
+                                                value="{{ auth()->user()->name ?? '' }}" readonly disabled>
                                         </div>
 
                                         <!-- Email -->
                                         <div class="form-group mb-3">
                                             <label for="email">Email:</label>
                                             <input type="email" name="email" id="email" class="form-control"
-                                                value="{{ auth()->user()->email ?? '' }}" readonly>
+                                                value="{{ auth()->user()->email ?? '' }}" readonly disabled>
                                         </div>
 
                                         <!-- Upload SRS -->
@@ -742,7 +685,7 @@
                                         <input type="hidden" name="status" value="pending">
 
                                         <!-- Submit Button -->
-                                        <button type="submit" class="btn btn-primary">Kirim Pesanan</button>
+                                        <button type="submit" class="buy-btn">Kirim Pesanan</button>
                                     </form>
                                 </div>
                             </div>

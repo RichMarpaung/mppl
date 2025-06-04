@@ -23,9 +23,9 @@
     <!-- Vendor CSS Files -->
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
     <!-- Main CSS File -->
     <link href="{{ asset('assets/vendor/css/main.css') }}" rel="stylesheet">
@@ -51,12 +51,17 @@
         .navmenu ul li.show {
             opacity: 1;
         }
+
+        .bg-primarys {
+            background-color: #b60d22,
+        }
     </style>
 </head>
 
 <body class="index-page">
 
-    <header id="header" class="header d-flex align-items-center fixed-top">
+    <header id="header"
+        class="header d-flex align-items-center fixed-top {{ request()->is('news') ? 'header-news-active' : '' }}">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
             <a href="/" class="logo d-flex align-items-center me-auto logo-tanniewa">
@@ -64,7 +69,8 @@
                 <h1 class="sitename">Tanniewa Putra</h1>
             </a>
 
-            <nav id="navmenu" class="navmenu">
+            <nav id="navmenu"
+                class="navmenu {{ request()->is('news') || request()->is('pelamar/create/*') ? 'nav-section-active' : '' }}">
                 <ul>
                     <li><a href="#hero" class="active">Beranda</a></li>
                     <li class="dropdown"><a href="#"><span>Tentang Kami</span> <i
@@ -80,7 +86,7 @@
                     <li><a href="/#portofolio">Portofolio</a></li>
                     <li><a href="/#lowongan">Lowongan</a></li>
                     <li><a href="/#layanan">Layanan</a></li>
-                    <li><a href="/news">Berita</a></li>
+                    <li><a href="/news" class="{{ request()->is('news') ? 'active' : '' }}">Berita</a></li>
 
                     {{-- <li class="dropdown"><a href="#"><span>Lainnya</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -106,9 +112,9 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-<a class="btn-getstarted" href="{{ auth()->check() ? '/profile' : route('login') }}">
-    {{ auth()->check() ? 'Profile' : 'Login' }}
-</a>
+            <a class="btn-getstarted" href="{{ auth()->check() ? '/profile' : route('login') }}">
+                {{ auth()->check() ? 'Profile' : 'Login' }}
+            </a>
         </div>
     </header>
 
@@ -117,7 +123,8 @@
 
 
     <div class="container copyright text-center mt-4">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">Tanniewa Putra</strong> <span>All Rights Reserved</span></p>
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Tanniewa Putra</strong> <span>All Rights
+                Reserved</span></p>
         <div class="credits">
             Designed by <a href="https://bootstrapmade.com/">KELOMPOK 1</a>
         </div>
@@ -133,17 +140,17 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
-    <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
-    <script src="{{asset('assets/vendor/aos/aos.js')}}"></script>
-    <script src="{{asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
-    <script src="{{asset('assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
-    <script src="{{asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
-    <script src="{{asset('assets/vendor/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
-    <script src="{{asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
+    <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+    <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
 
     <!-- Main JS File -->
-    <script src="{{asset('assets/vendor/js/main.js')}}"></script>
+    <script src="{{ asset('assets/vendor/js/main.js') }}"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -156,6 +163,8 @@
             });
         });
     </script>
+
+
 
 </body>
 
