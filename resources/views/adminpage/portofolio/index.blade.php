@@ -1,3 +1,4 @@
+{{-- filepath: c:\laragon\www\Mppl\resources\views\adminpage\portofolio\index.blade.php --}}
 @extends('layouts.master-admin')
 @section('judul', 'Portofolio')
 @section('content')
@@ -10,26 +11,18 @@
             <table class="table bordered-table mb-0" id="dataTable" data-page-length='10'>
                 <thead>
                     <tr>
+                        <th scope="col">No</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">Detail</th>
                         <th scope="col">Nama Mitra</th>
-                        <th scope="col">Link</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($portofolios as $portofolio)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $portofolio->nama }}</td>
-                            <td>{{ Str::limit($portofolio->detail, 50) }}</td>
                             <td>{{ $portofolio->mitra }}</td>
-                            <td>
-                                @if ($portofolio->link)
-                                    <a href="{{ $portofolio->link }}" target="_blank">{{ $portofolio->link }}</a>
-                                @else
-                                    <span class="text-muted">-</span>
-                                @endif
-                            </td>
                             <td>
                                 <a href="javascript:void(0)" data-bs-toggle="modal"
                                     data-bs-target="#modalDetail{{ $portofolio->id }}"

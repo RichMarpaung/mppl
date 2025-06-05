@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
-            $table->timestamp('tanggal_mulai')->nullable();
+            $table->String('nama');
+            $table->String('deskripsi');
             $table->timestamp('tanggal_selesai')->nullable();
             $table->String('file')->nullable();
-            $table->enum('status', ['pending', 'in_progress', 'completed', 'canceled']);
+            $table->foreignId('team_id')->constrained('teams')->onDelete('cascade');
+            $table->enum('status', ['pending', 'completed','revisi','accepted'])->default('pending');
             $table->timestamps();
         });
     }

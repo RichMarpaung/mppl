@@ -1,6 +1,9 @@
 @extends('layouts.master-user')
 @section('title', 'Berita')
 @section('content')
+    <!-- Kotak merah di atas container -->
+    <div class="w-100" style="background:#c5172c;height:100px;display:flex;align-items:center;justify-content:center;">
+    </div>
     <div class="container py-5 mt-5">
         <h2 class="mt-4 text-center fw-bold">Berita Terbaru</h2>
         <div class="row gy-4">

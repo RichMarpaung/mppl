@@ -6,7 +6,7 @@
 @endsection
 @section('content')
 <div>
-    <a href="index.html" class="mb-40 d-flex align-items-center  ">
+    <a href="/" class="mb-40 d-flex align-items-center  ">
         <img src="assets/images/logo3.png" alt="">
         <h5>TANNEIWA PUTRA</h5>
     </a>

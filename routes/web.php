@@ -21,33 +21,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 
-
-
-
-
-
-
-
-
-
-
-// Route::middleware(['auth',MustAdmin::class])->group(function () {
-//     Route::get('/', function () {
-//         return view('adminpage.dashboard');
-//     });
-
-// });
 Route::get('/news', [NewsController::class, 'userIndex'])->name('news.user.index');
 Route::get('/', [UserPageController::class, 'dashboard'])->name('dashboard.page');
-
-Route::get('/orders/create/{service}', [OrderController::class, 'create'])->name('user.orders.create');
-Route::middleware('auth')->group(function () {
-
-    Route::get('/home', function () {
-        return view('userpage.home');
-    });
-
-});
 
 Route::post('/logout', [AuthContoller::class, 'logout'])->name('logout');
 Route::middleware('guest')->group(function () {
@@ -79,7 +54,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/home');
+    return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
@@ -91,9 +66,8 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 //Admin Routes
 Route::middleware(['auth', MustAdmin::class])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return view('adminpage.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/', [UserPageController::class, 'adminDashboard'])->name('admin.dashboard');
+
     Route::resource('news', NewsController::class);
     Route::resource('portofolios', PortofolioController::class);
     Route::resource('services', ServiceController::class);
@@ -119,6 +93,9 @@ Route::middleware('auth')->group(function () {
 
     Route::put('/profile/photo', [UserPageController::class, 'updatePhoto'])->name('user.profile.updatePhoto');
     Route::get('/profile', [UserPageController::class, 'profile'])->name('user.profile');
+    Route::get('/profile-lowongan', [UserPageController::class, 'profileLowongan'])->name('user.profile.lowongan');
+    Route::get('/profile-order', [UserPageController::class, 'profileOrder'])->name('user.profile.order');
+    Route::get('/profile-task', [UserPageController::class, 'profileTask'])->name('user.profile.task');
     Route::get('/pelamar/create/{lowongan}', [PelamarController::class, 'create'])->name('user.pelamars.create');
     Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('user.pelamars.store');
      Route::post('/logout', [AuthContoller::class, 'logout'])->name('logout');

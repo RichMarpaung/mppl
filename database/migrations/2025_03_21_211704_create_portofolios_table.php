@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('portofolios', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 50);
+            $table->string('nama');
 
             $table->string('mitra');
             $table->string('lokasi');

@@ -44,5 +44,20 @@ class UserSeeder extends Seeder
 
         ]);
         User::factory()->count(20)->create();
+        User::insert([
+
+            [
+                'role_id' => 1, // Assuming 'userbiasa' role has ID 2
+                'name' => 'Rich Marpaung',
+                'nik' => '898989',
+                'phone'=>'083199554399',
+                'address'=>'Jl.Gereja Porsea',
+                'email' => 'ronamarpaung06@gmail.com',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
     }
 }

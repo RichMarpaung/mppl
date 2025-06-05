@@ -131,7 +131,9 @@
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Team</h2>
-                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+                <p>Tim kami terdiri dari individu berbakat yang bekerja sama untuk menghadirkan solusi terbaik dengan
+                    dedikasi, keahlian, dan semangat kolaborasi.</p>
+
             </div><!-- End Section Title -->
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -165,85 +167,22 @@
           </script>
                     <div class="swiper-wrapper">
 
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <p>
-                                    <i class=" bi bi-quote quote-icon-left"></i>
-                                    <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit
-                                        rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam,
-                                        risus at semper.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Saul Goodman</h3>
-                                <h4>Ceo &amp; Founder</h4>
-                            </div>
-                        </div><!-- End testimonial item -->
+                        @foreach ($teams as $team)
+                            <div class="swiper-slide">
+                                <div class="testimonial-item">
+                                    <p>
+                                        <i class="bi bi-quote quote-icon-left"></i>
+                                        <span>{{ $team->pengalaman }}</span>
+                                        <i class="bi bi-quote quote-icon-right"></i>
+                                    </p>
+                                    <img src="{{ Storage::url($team->image) }}" class="testimonial-img" alt=""
+                                        style="width:130px;height:130px;object-fit:cover;border-radius:50%;border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                                    <h3>{{ $team->user->name }}</h3>
+                                    <h4>{{ $team->posisi }}</h4>
+                                </div>
+                            </div><!-- End testimonial item -->
+                        @endforeach
 
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid
-                                        malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim
-                                        culpa.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Sara Wilsson</h3>
-                                <h4>Designer</h4>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem
-                                        veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint
-                                        minim.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Jena Karlis</h3>
-                                <h4>Store Owner</h4>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim
-                                        fugiat dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore
-                                        illum veniam.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Matt Brandon</h3>
-                                <h4>Freelancer</h4>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor
-                                        noster veniam sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi
-                                        cillum quid.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>John Larson</h3>
-                                <h4>Entrepreneur</h4>
-                            </div>
-                        </div><!-- End testimonial item -->
 
                     </div>
                     <div class="swiper-pagination"></div>
@@ -510,14 +449,71 @@
                                     @if ($portofolio->image)
                                         <img src="{{ Storage::url($portofolio->image) }}" class="card-img-top"
                                             alt="Gambar Portofolio">
+                                    @else
+                                        <div class="card-img-top d-flex align-items-center justify-content-center"
+                                            style="height:150px;background:#c5172c;">
+                                            <img src="{{ asset('assets/img/LogoTanniewa.png') }}" alt="logo-tanniewa"
+                                                style="max-height:100px;max-width:100px;object-fit:contain;">
+                                        </div>
                                     @endif
-                                    <div class="card-body" style="margin-top: 30px;">
+                                    <div class="card-body" style="margin-top: 10px;">
                                         <h5 class="card-title">{{ $portofolio->nama }}</h5>
-                                        <p class="card-text">{{ Str::limit($portofolio->detail, 100) }}</p>
                                         <p class="mb-1"><strong>Mitra:</strong> {{ $portofolio->mitra }}</p>
                                         <p class="mb-1"><strong>Lokasi:</strong> {{ $portofolio->lokasi }}</p>
-                                        <p class="mb-1"><strong>Tanggal:</strong>
-                                            {{ \Carbon\Carbon::parse($portofolio->waktu)->format('d-m-Y') }}</p>
+                                        <button type="button" class="btn btn-outline-danger mt-2" data-bs-toggle="modal"
+                                            data-bs-target="#modalPortofolio{{ $portofolio->id }}">
+                                            Lihat Detail
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Detail Portofolio -->
+                            <div class="modal fade" id="modalPortofolio{{ $portofolio->id }}" tabindex="-1"
+                                aria-labelledby="modalPortofolioLabel{{ $portofolio->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background:#c5172c;">
+                                            <h5 class="modal-title text-white"
+                                                id="modalPortofolioLabel{{ $portofolio->id }}">Detail Portofolio</h5>
+                                            <button type="button" class="btn-close btn-close-white"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h5>{{ $portofolio->nama }}</h5>
+                                            <p><strong>Detail:</strong> {{ $portofolio->detail }}</p>
+                                            <p><strong>Mitra:</strong> {{ $portofolio->mitra }}</p>
+                                            <p><strong>Tanggal:</strong>
+                                                {{ \Carbon\Carbon::parse($portofolio->waktu)->format('d-m-Y') }}</p>
+                                            <p>
+                                                <strong>Link:</strong>
+                                                @if ($portofolio->link)
+                                                    <a href="{{ $portofolio->link }}"
+                                                        target="_blank">{{ $portofolio->link }}</a>
+                                                @else
+                                                    <span class="text-muted">-</span>
+                                                @endif
+                                            </p>
+                                            <div class="mb-2">
+                                                <strong>Gambar Mitra:</strong><br>
+                                                @if ($portofolio->image_mitra)
+                                                    <img src="{{ Storage::url($portofolio->image_mitra) }}"
+                                                        class="img-fluid mb-2" alt="Gambar Mitra"
+                                                        style="max-width:200px;">
+                                                @else
+                                                    <span class="text-muted">Tidak ada gambar mitra</span>
+                                                @endif
+                                            </div>
+                                            <div>
+                                                <strong>Gambar Portofolio:</strong><br>
+                                                @if ($portofolio->image)
+                                                    <img src="{{ Storage::url($portofolio->image) }}" class="img-fluid"
+                                                        alt="Gambar Portofolio" style="max-width:200px;">
+                                                @else
+                                                    <span class="text-muted">Tidak ada gambar portofolio</span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

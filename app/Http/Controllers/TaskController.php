@@ -13,7 +13,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::all();
+        return view('adminpage.task.index', compact('tasks'));
     }
 
     /**

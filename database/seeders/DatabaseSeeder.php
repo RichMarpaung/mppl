@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Portofolio;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,6 +20,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ServiceSeeder::class,
+            PortofolioSeeder::class,
+            LowonganSeeder::class,
         ]);
     }
 }

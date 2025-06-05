@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lowongan;
+use App\Models\Order;
+use App\Models\Pelamar;
+use App\Models\Portofolio;
 use App\Models\Service;
 use App\Models\Team;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -26,16 +31,10 @@ class UserPageController extends Controller
         $teams = Team::all();
         $lowongans = Lowongan::where('status', 'dibuka')->get();
 
-<<<<<<< HEAD
+
         $portofolios = \App\Models\Portofolio::latest()->get();
+
         return view('userpage.index', compact('teams', 'lowongans', 'services', 'portofolios'));
-=======
-        // return view('userpage.index', compact('teams', 'lowongans', 'services'));
-
-        $portofolios = \App\Models\Portofolio::latest()->get();
-return view('userpage.index', compact('teams', 'lowongans', 'services', 'portofolios'));
-
->>>>>>> 9093bd9003f19f4e29aa41c39444cbf58f13fc54
     }
 
     /**
@@ -45,30 +44,49 @@ return view('userpage.index', compact('teams', 'lowongans', 'services', 'portofo
     {
         return view('adminpage.profile');
     }
+    public function adminDashboard()
+{
+    $totalUsers = User::count();
+    $totalOrders = Order::count();
+    $totalTeams = Team::count();
+
+    $today = Carbon::today();
+    $yesterday = Carbon::yesterday();
+
+    $ordersToday = Order::whereDate('created_at', $today)->count();
+    $ordersYesterday = Order::whereDate('created_at', $yesterday)->count();
+
+    // Hitung pertumbuhan (growth)
+    $orderGrowth = $ordersYesterday > 0
+        ? round((($ordersToday - $ordersYesterday) / $ordersYesterday) * 100)
+        : ($ordersToday > 0 ? 100 : 0);
+
+    return view('adminpage.dashboard', compact(
+        'totalUsers', 'totalOrders', 'totalTeams', 'ordersToday', 'orderGrowth'
+    ));
+}
     public function profile()
     {
-        $orders = \App\Models\Order::where('user_id', Auth::id())->get();
-<<<<<<< HEAD
 
-        $pelamarans = \App\Models\Pelamar::with('lowongan')
+        return view('userpage.profiles.index');
+    }
+    public function profileLowongan()
+    {
+        $pelamarans = Pelamar::with('lowongan')
             ->where('user_id', Auth::id())
             ->get();
 
-        return view('userpage.profile', compact('orders', 'pelamarans'));
-=======
+        return view('userpage.profiles.lowongan', compact( 'pelamarans'));
+    }
+    public function profileOrder()
+    {
+        $orders = Order::where('user_id', Auth::id())->get();
 
-
-$pelamarans = \App\Models\Pelamar::with('lowongan')
-    ->where('user_id', Auth::id())
-    ->get();
-
-return view('userpage.profile', compact('orders', 'pelamarans'));
-
->>>>>>> 9093bd9003f19f4e29aa41c39444cbf58f13fc54
+        return view('userpage.profiles.pesanan', compact('orders'));
     }
     public function updateProfile(Request $request)
     {
-        $user = \App\Models\User::find(Auth::id());
+        $user = User::find(Auth::id());
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,

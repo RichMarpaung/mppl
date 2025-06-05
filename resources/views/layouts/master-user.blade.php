@@ -72,21 +72,21 @@
             <nav id="navmenu"
                 class="navmenu {{ request()->is('news') || request()->is('pelamar/create/*') ? 'nav-section-active' : '' }}">
                 <ul>
-                    <li><a href="#hero" class="active">Beranda</a></li>
+                    <li><a href="{{ route('dashboard.page') }}#hero" class="active">Beranda</a></li>
                     <li class="dropdown"><a href="#"><span>Tentang Kami</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="#about">Tentang Kami</a></li>
-                            <li><a href="#sejarah">Sejarah</a></li>
-                            <li><a href="#visi">Visi Misi</a></li>
-                            <li><a href="#team">Tim</a></li>
+                            <li><a href="{{ route('dashboard.page') }}#about">Tentang Kami</a></li>
+                            <li><a href="{{ route('dashboard.page') }}#sejarah">Sejarah</a></li>
+                            <li><a href="{{ route('dashboard.page') }}#visi">Visi Misi</a></li>
+                            <li><a href="{{ route('dashboard.page') }}#team">Tim</a></li>
                         </ul>
                     </li>
                     {{-- <li><a href="/#portfolio">Portfolio</a></li> --}}
-                    <li><a href="/#portofolio">Portofolio</a></li>
-                    <li><a href="/#lowongan">Lowongan</a></li>
-                    <li><a href="/#layanan">Layanan</a></li>
-                    <li><a href="/news" class="{{ request()->is('news') ? 'active' : '' }}">Berita</a></li>
+                    <li><a href="{{ route('dashboard.page') }}#portofolio">Portofolio</a></li>
+                    <li><a href="{{ route('dashboard.page') }}#lowongan">Lowongan</a></li>
+                    <li><a href="{{ route('dashboard.page') }}#layanan">Layanan</a></li>
+                    <li><a href="{{ route('news.user.index') }}" class="{{ request()->is('news') ? 'active' : '' }}">Berita</a></li>
 
                     {{-- <li class="dropdown"><a href="#"><span>Lainnya</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>

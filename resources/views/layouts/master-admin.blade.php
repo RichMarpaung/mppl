@@ -81,11 +81,11 @@
                     </a>
                 </li>
                 <li>
-        <a href="{{ route('admin.news.index') }}">
-          <iconify-icon icon="bi:chat-dots" class="menu-icon"></iconify-icon>
-          <span>Manage News</span>
-        </a>
-      </li>
+                    <a href="{{ route('admin.news.index') }}">
+                        <iconify-icon icon="bi:chat-dots" class="menu-icon"></iconify-icon>
+                        <span>Manage News</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="{{ route('admin.lowongans.index') }}">
@@ -103,6 +103,18 @@
                     <a href="{{ route('admin.documents.index') }}">
                         <i class="ri-folder-lock-line text-xl me-14 d-flex w-auto"></i>
                         <span>Manage Document</span>
+                    </a>
+                </li>
+                <li>
+    <a href="{{ route('admin.tasks.index') }}">
+        <iconify-icon icon="mdi:clipboard-check-outline" class="menu-icon"></iconify-icon>
+        <span>Manage Task</span>
+    </a>
+</li>
+                <li>
+                    <a href="{{ route('dashboard.page') }}">
+                       <iconify-icon icon="solar:home-smile-angle-outline" class="menu-icon"></iconify-icon>
+                        <span>Landing Page</span>
                     </a>
                 </li>
 

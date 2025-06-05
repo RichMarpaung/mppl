@@ -48,9 +48,9 @@ class PortofolioController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama'        => 'required|string|max:50',
-            'mitra'       => 'required|string|max:100',
-            'lokasi'      => 'required|string|max:100',
+            'nama'        => 'required|string|max:255',
+            'mitra'       => 'required|string|max:255',
+            'lokasi'      => 'required|string|max:255',
             'waktu'       => 'required|date',
             'image_mitra' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -78,9 +78,9 @@ class PortofolioController extends Controller
     public function update(Request $request, Portofolio $portofolio)
     {
         $validated = $request->validate([
-            'nama'        => 'required|string|max:50',
-            'mitra'       => 'required|string|max:100',
-            'lokasi'      => 'required|string|max:100',
+            'nama'        => 'required|string|max:255',
+            'mitra'       => 'required|string|max:255',
+            'lokasi'      => 'required|string|max:255',
             'waktu'       => 'required|date',
             'image_mitra' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
