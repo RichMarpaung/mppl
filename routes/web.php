@@ -77,6 +77,8 @@ Route::middleware(['auth', MustAdmin::class])->prefix('admin')->name('admin.')->
     Route::resource('portofolios', PortofolioController::class);
     Route::resource('teams', TeamController::class);
     Route::resource('tasks', TaskController::class);
+    Route::patch('admin/tasks/{id}/revisi', [TaskController::class, 'revisi'])->name('tasks.revisi');
+    Route::patch('admin/tasks/{id}/approve', [TaskController::class, 'approve'])->name('tasks.approve');
     Route::resource('pelamars', PelamarController::class);
     Route::resource('lowongans', LowonganController::class);
     Route::resource('documents', DocumentController::class);
@@ -90,7 +92,6 @@ Route::middleware(['auth', MustAdmin::class])->prefix('admin')->name('admin.')->
 //user routes
 Route::middleware('auth')->group(function () {
     Route::post('/orders', [OrderController::class, 'store'])->name('user.orders.store');
-
     Route::put('/profile/photo', [UserPageController::class, 'updatePhoto'])->name('user.profile.updatePhoto');
     Route::get('/profile', [UserPageController::class, 'profile'])->name('user.profile');
     Route::get('/profile-lowongan', [UserPageController::class, 'profileLowongan'])->name('user.profile.lowongan');
@@ -98,5 +99,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile-task', [UserPageController::class, 'profileTask'])->name('user.profile.task');
     Route::get('/pelamar/create/{lowongan}', [PelamarController::class, 'create'])->name('user.pelamars.create');
     Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('user.pelamars.store');
+    Route::post('/user/tasks/{id}/upload', [UserPageController::class, 'uploadTaskFile'])->name('user.tasks.upload');
      Route::post('/logout', [AuthContoller::class, 'logout'])->name('logout');
 });

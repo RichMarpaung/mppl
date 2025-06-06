@@ -23,7 +23,7 @@ class TeamSeeder extends Seeder
                 'npwp' => 'uploads/npwp/mygILpm2Mef9dZAlBdnbUjiclXxoL0oG5vpUdEfs.jpg', // Ganti dengan path file NPWP jika ada
                 'ijazah' => 'uploads/ijazah/DLW6WbY6V3WQhrG6Qynla5NNfe23txUedjzIx6Al.jpg', // Ganti dengan path file Ijazah jika ada
                 'cv' => 'uploads/cv/cX87km4HQr1kR6pqxHEw1w6ZndmMunGVJKARzM0a.jpg', // Ganti dengan path file CV jika ada
-                'image' => 'uploads/image/5K2hG3Sgy9FUhvvTj8u57IRU4lUNp8ephGD8PGof.png', // Ganti dengan path file gambar jika ada
+                'image' => 'uploads/image/5K2hG3Sgy9FUhvvTj8u57IRU4lUNp8ephGD8PGof.jpg', // Ganti dengan path file gambar jika ada
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

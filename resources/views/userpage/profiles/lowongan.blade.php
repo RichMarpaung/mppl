@@ -1,7 +1,7 @@
 @extends('layouts.profile-user')
 @section('title', 'Lowongan')
 @section('profile-content')
-<div class="col-lg-8">
+
             <div class="card basic-data-table">
                 <div class="card-body">
                     <h5 class="mb-3">Lowongan yang Diikuti</h5>
@@ -49,5 +49,5 @@
                 </div>
             </div>
         </div>
-    </div>
+
 @endsection

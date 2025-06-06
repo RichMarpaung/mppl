@@ -1,36 +1,50 @@
+{{-- filepath: c:\laragon\www\Mppl\resources\views\userpage\profiles\pesanan.blade.php --}}
 @extends('layouts.profile-user')
-@section('title', 'Order')
+@section('title', 'Lowongan')
 @section('profile-content')
-    <div class="col-lg-8">
-            <div class="card mb-4">
-                <div class="card-body p-24">
-                    <h5 class="mb-3">Pesanan Diterima</h5>
-                    <div class="table-responsive">
-                        <table class="table bordered-table mb-0">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nama Layanan</th>
-                                    <th>Status</th>
-                                    <th>Tanggal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($orders as $order)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $order->service->nama ?? '-' }}</td>
-                                        <td>{{ ucfirst($order->status) }}</td>
-                                        <td>{{ $order->created_at->format('d-m-Y') }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="4" class="text-center">Belum ada pesanan diterima.</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+
+<div class="card basic-data-table">
+    <div class="card-body">
+        <h5 class="mb-3">Lowongan yang Diikuti</h5>
+        <div class="table-responsive">
+            <table class="table bordered-table mb-0" id="dataTableLowongan" data-page-length='10'>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nama Service</th>
+                        <th scope="col">Status Order</th>
+                        <th scope="col">Tanggal Pemesanan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($orders as $order)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $order->service->nama ?? '-' }}</td>
+                            <td>
+                                @php
+                                    $status = strtolower($order->status);
+                                @endphp
+                                <span class="badge
+                                    @if($status == 'pending') bg-warning
+                                    @elseif($status == 'diproses') bg-primary
+                                    @elseif($status == 'selesai') bg-success
+                                    @elseif($status == 'canceled') bg-danger
+                                    @else bg-secondary
+                                    @endif">
+                                    {{ ucfirst($order->status) }}
+                                </span>
+                            </td>
+                            <td>{{ $order->created_at->format('d-m-Y') }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">Belum ada lowongan yang didaftar.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @endsection

@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             PortofolioSeeder::class,
             LowonganSeeder::class,
+            TeamSeeder::class,
         ]);
     }
 }

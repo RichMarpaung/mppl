@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Pelamar;
 use App\Models\Portofolio;
 use App\Models\Service;
+use App\Models\Task;
 use App\Models\Team;
 use App\Models\User;
 use Carbon\Carbon;
@@ -32,7 +33,7 @@ class UserPageController extends Controller
         $lowongans = Lowongan::where('status', 'dibuka')->get();
 
 
-        $portofolios = \App\Models\Portofolio::latest()->get();
+        $portofolios = Portofolio::latest()->get();
 
         return view('userpage.index', compact('teams', 'lowongans', 'services', 'portofolios'));
     }
@@ -45,26 +46,30 @@ class UserPageController extends Controller
         return view('adminpage.profile');
     }
     public function adminDashboard()
-{
-    $totalUsers = User::count();
-    $totalOrders = Order::count();
-    $totalTeams = Team::count();
+    {
+        $totalUsers = User::count();
+        $totalOrders = Order::count();
+        $totalTeams = Team::count();
 
-    $today = Carbon::today();
-    $yesterday = Carbon::yesterday();
+        $today = Carbon::today();
+        $yesterday = Carbon::yesterday();
 
-    $ordersToday = Order::whereDate('created_at', $today)->count();
-    $ordersYesterday = Order::whereDate('created_at', $yesterday)->count();
+        $ordersToday = Order::whereDate('created_at', $today)->count();
+        $ordersYesterday = Order::whereDate('created_at', $yesterday)->count();
 
-    // Hitung pertumbuhan (growth)
-    $orderGrowth = $ordersYesterday > 0
-        ? round((($ordersToday - $ordersYesterday) / $ordersYesterday) * 100)
-        : ($ordersToday > 0 ? 100 : 0);
+        // Hitung pertumbuhan (growth)
+        $orderGrowth = $ordersYesterday > 0
+            ? round((($ordersToday - $ordersYesterday) / $ordersYesterday) * 100)
+            : ($ordersToday > 0 ? 100 : 0);
 
-    return view('adminpage.dashboard', compact(
-        'totalUsers', 'totalOrders', 'totalTeams', 'ordersToday', 'orderGrowth'
-    ));
-}
+        return view('adminpage.dashboard', compact(
+            'totalUsers',
+            'totalOrders',
+            'totalTeams',
+            'ordersToday',
+            'orderGrowth'
+        ));
+    }
     public function profile()
     {
 
@@ -76,13 +81,23 @@ class UserPageController extends Controller
             ->where('user_id', Auth::id())
             ->get();
 
-        return view('userpage.profiles.lowongan', compact( 'pelamarans'));
+        return view('userpage.profiles.lowongan', compact('pelamarans'));
     }
     public function profileOrder()
     {
         $orders = Order::where('user_id', Auth::id())->get();
 
         return view('userpage.profiles.pesanan', compact('orders'));
+    }
+    public function profileTask()
+    {
+        // Ambil semua team yang dimiliki user login
+        $teams = Team::where('user_id', Auth::id())->pluck('id');
+
+        // Ambil semua task yang terkait dengan team user
+        $tasks = Task::whereIn('team_id', $teams)->latest()->get();
+
+        return view('userpage.profiles.task', compact('tasks'));
     }
     public function updateProfile(Request $request)
     {
@@ -98,9 +113,10 @@ class UserPageController extends Controller
         return back()->with('success', 'Profil berhasil diperbarui.');
     }
 
+
     public function updatePhoto(Request $request)
     {
-        $user = \App\Models\User::findOrFail(Auth::id());
+        $user = User::findOrFail(Auth::id());
         $request->validate([
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:20048',
         ]);
@@ -119,7 +135,7 @@ class UserPageController extends Controller
         $request->validate([
             'password' => 'required|string|min:8|confirmed',
         ]);
-        $user = \App\Models\User::find(Auth::id());
+        $user = User::find(Auth::id());
         if ($user) {
             $user->password = Hash::make($request->password);
             $user->save();
@@ -127,5 +143,31 @@ class UserPageController extends Controller
         } else {
             return back()->withErrors(['user' => 'User not found.']);
         }
+    }
+    public function uploadTaskFile(Request $request, $id)
+    {
+        $task = Task::findOrFail($id);
+
+        $team = Team::where('user_id', Auth::id())->first();
+
+        if (!$team || $task->team_id != $team->id) {
+            abort(403, 'Akses ditolak.');
+        }
+
+        $request->validate([
+            'file_task' => 'required|file|max:20048',
+        ]);
+
+        // Hapus file lama jika ada
+        if ($task->file_task && Storage::disk('public')->exists($task->file_task)) {
+            Storage::disk('public')->delete($task->file_task);
+        }
+
+        // Simpan file baru
+        $task->file_task = $request->file('file_task')->store('tasks/file_task', 'public');
+        $task->status = 'completed'; // opsional
+        $task->save();
+
+        return redirect()->back()->with('success', 'File task berhasil diupload.');
     }
 }

@@ -16,9 +16,11 @@ return new class extends Migration
             $table->String('nama');
             $table->String('deskripsi');
             $table->timestamp('tanggal_selesai')->nullable();
-            $table->String('file')->nullable();
+            $table->String('file_ask')->nullable();
+            $table->String('file_task')->nullable();
+            $table->String('catatan')->nullable();
             $table->foreignId('team_id')->constrained('teams')->onDelete('cascade');
-            $table->enum('status', ['pending', 'completed','revisi','accepted'])->default('pending');
+            $table->enum('status', ['in-progres', 'completed','revisi','accepted','late'])->default('in-progres');
             $table->timestamps();
         });
     }
