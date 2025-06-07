@@ -15,7 +15,7 @@ class TeamSeeder extends Seeder
     {
         Team::insert([
             [
-                'user_id' => 23, // Ganti dengan ID user yang sesuai
+                'user_id' => 3, // Ganti dengan ID user yang sesuai
                 'posisi' => 'Backend Developer',
                 'status' => 'Tetap',
                 'pengalaman' => 'Sebagai programmer backend, aku merancang logika, database, dan API di balik layar. Meski tak terlihat, satu bug bisa bikin sistem kacau. Tapi justru di situlah tantangannya—membangun fondasi kuat agar aplikasi berjalan lancar tanpa drama',
