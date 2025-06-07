@@ -112,71 +112,67 @@ class TeamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Team $team)
-    {
-        // Validasi input
-        $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'posisi' => 'required|string|max:50',
-            'status' => 'required|in:Tetap,freelance',
-            'pengalaman' => 'nullable|string|max:255',
-            'ktp' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'npwp' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'ijazah' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'cv' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+   public function update(Request $request, Team $team)
+{
+    // Validasi input
+    $validated = $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'posisi' => 'required|string|max:50',
+        'status' => 'required|in:Tetap,freelance',
+        'pengalaman' => 'nullable|string|max:255',
+        'ktp' => 'nullable|image|mimes:jpeg,png,jpg|max:5048',
+        'npwp' => 'nullable|image|mimes:jpeg,png,jpg|max:5048',
+        'ijazah' => 'nullable|image|mimes:jpeg,png,jpg|max:5048',
+        'cv' => 'nullable|image|mimes:jpeg,png,jpg|max:5048',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:5048',
+    ]);
 
-        // Proses upload file baru jika ada
-        if ($request->hasFile('ktp')) {
-            $ktpPath = $request->file('ktp')->store('uploads/ktp', 'public');
-            if ($team->ktp) {
-                Storage::disk('public')->delete($team->ktp); // Hapus file lama
-            }
-            $team->ktp = $ktpPath;
+    // Proses upload file baru jika ada, hapus file lama jika ada
+    if ($request->hasFile('ktp')) {
+        if ($team->ktp && Storage::disk('public')->exists($team->ktp)) {
+            Storage::disk('public')->delete($team->ktp);
         }
-
-        if ($request->hasFile('npwp')) {
-            $npwpPath = $request->file('npwp')->store('uploads/npwp', 'public');
-            if ($team->npwp) {
-                Storage::disk('public')->delete($team->npwp); // Hapus file lama
-            }
-            $team->npwp = $npwpPath;
-        }
-
-        if ($request->hasFile('ijazah')) {
-            $ijazahPath = $request->file('ijazah')->store('uploads/ijazah', 'public');
-            if ($team->ijazah) {
-                Storage::disk('public')->delete($team->ijazah); // Hapus file lama
-            }
-            $team->ijazah = $ijazahPath;
-        }
-
-        if ($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('uploads/cv', 'public');
-            if ($team->cv) {
-                Storage::disk('public')->delete($team->cv); // Hapus file lama
-            }
-            $team->cv = $cvPath;
-        }
-
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('uploads/image', 'public');
-            if ($team->image) {
-                Storage::disk('public')->delete($team->image); // Hapus file lama
-            }
-            $team->image = $imagePath;
-        }
-
-        // Perbarui data tim
-        $team->user_id = $validated['user_id'];
-        $team->posisi = $validated['posisi'];
-        $team->status = $validated['status'];
-        $team->save();
-
-        // Redirect ke halaman daftar tim dengan pesan sukses
-        return redirect()->route('admin.teams.index')->with('success', 'Team berhasil diperbarui.');
+        $team->ktp = $request->file('ktp')->store('uploads/ktp', 'public');
     }
+
+    if ($request->hasFile('npwp')) {
+        if ($team->npwp && Storage::disk('public')->exists($team->npwp)) {
+            Storage::disk('public')->delete($team->npwp);
+        }
+        $team->npwp = $request->file('npwp')->store('uploads/npwp', 'public');
+    }
+
+    if ($request->hasFile('ijazah')) {
+        if ($team->ijazah && Storage::disk('public')->exists($team->ijazah)) {
+            Storage::disk('public')->delete($team->ijazah);
+        }
+        $team->ijazah = $request->file('ijazah')->store('uploads/ijazah', 'public');
+    }
+
+    if ($request->hasFile('cv')) {
+        if ($team->cv && Storage::disk('public')->exists($team->cv)) {
+            Storage::disk('public')->delete($team->cv);
+        }
+        $team->cv = $request->file('cv')->store('uploads/cv', 'public');
+    }
+
+    if ($request->hasFile('image')) {
+        if ($team->image && Storage::disk('public')->exists($team->image)) {
+            Storage::disk('public')->delete($team->image);
+        }
+        $team->image = $request->file('image')->store('uploads/image', 'public');
+    }
+
+    // Update data tim
+    $team->user_id = $validated['user_id'];
+    $team->posisi = $validated['posisi'];
+    $team->status = $validated['status'];
+    $team->pengalaman = $validated['pengalaman'] ?? null;
+    $team->save();
+
+    // Redirect ke halaman daftar tim dengan pesan sukses
+    return redirect()->route('admin.teams.index')->with('success', 'Team berhasil diperbarui.');
+}
 
     /**
      * Remove the specified resource from storage.

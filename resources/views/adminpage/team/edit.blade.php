@@ -1,3 +1,4 @@
+{{-- filepath: c:\laragon\www\Mppl\resources\views\adminpage\team\edit.blade.php --}}
 @extends('layouts.master-admin')
 
 @section('judul', 'Edit Team')
@@ -8,6 +9,17 @@
         <h5 class="card-title mb-0">Form Edit Team</h5>
     </div>
     <div class="card-body">
+        {{-- Tampilkan error validasi --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('admin.teams.update', $team->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -67,6 +79,15 @@
                     <input type="file" name="ijazah" id="ijazah" class="form-control" accept="image/*">
                 </div>
 
+                <!-- Upload Image (Foto) -->
+                <div class="col-12">
+                    <label for="image" class="form-label">Upload Foto:</label>
+                    @if($team->image)
+                        <p>Foto saat ini: <a href="{{ asset('storage/' . $team->image) }}" target="_blank">Lihat Foto</a></p>
+                    @endif
+                    <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                </div>
+
                 <!-- Upload CV -->
                 <div class="col-12">
                     <label for="cv" class="form-label">Upload CV:</label>
@@ -74,6 +95,12 @@
                         <p>Dokumen saat ini: <a href="{{ asset('storage/' . $team->cv) }}" target="_blank">Lihat CV</a></p>
                     @endif
                     <input type="file" name="cv" id="cv" class="form-control" accept="image/*">
+                </div>
+
+                <!-- Pengalaman -->
+                <div class="col-12">
+                    <label for="pengalaman" class="form-label">Pengalaman:</label>
+                    <input type="text" name="pengalaman" id="pengalaman" class="form-control" value="{{ $team->pengalaman }}">
                 </div>
 
                 <!-- Tombol Submit -->
