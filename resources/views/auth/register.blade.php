@@ -13,6 +13,16 @@
     <h4 class="mb-12">Sign Up to your Account</h4>
     <p class="mb-32 text-secondary-light text-lg">Welcome back! please enter your detail</p>
 </div>
+{{-- Error message --}}
+@if ($errors->any())
+    <div class="alert alert-danger mb-3">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <form method="POST" action="{{ route('register') }}">
     @csrf
     <div class="icon-field mb-16">

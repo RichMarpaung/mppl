@@ -11,7 +11,7 @@ class NewsController extends Controller
 {
     public function userIndex()
 {
-    $news = \App\Models\News::latest()->get();
+    $news = News::latest()->get();
     return view('userpage.news', compact('news'));
 }
     public function index()

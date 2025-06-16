@@ -22,12 +22,12 @@ class AuthContoller extends Controller
     }
     function register(Request $request){
         // dd($request->all());
-        $request->validate([
-            'name' => 'required',
-            'nik' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
-        ]);
+       $request->validate([
+        'name' => 'required',
+        'nik' => 'required|unique:users,nik',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|confirmed|min:8',
+    ]);
         $user = User::create([
             'name' => $request->name,
             'nik' => $request->nik,
@@ -35,9 +35,9 @@ class AuthContoller extends Controller
             'password' => bcrypt($request->password),
             'role_id' => '2',
         ]);
-        Auth::login($user);
         event(new Registered($user));
-        return redirect('/profile');
+        Auth::login($user);
+        return redirect('/email/verify');
     }
     function login(Request $request){
         $request->validate([
