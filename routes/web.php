@@ -90,7 +90,7 @@ Route::middleware(['auth', MustAdmin::class])->prefix('admin')->name('admin.')->
 // end admin routes
 
 //user routes
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
     Route::post('/orders', [OrderController::class, 'store'])->name('user.orders.store');
     Route::put('/profile/photo', [UserPageController::class, 'updatePhoto'])->name('user.profile.updatePhoto');
     Route::get('/profile', [UserPageController::class, 'profile'])->name('user.profile');
@@ -100,5 +100,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/pelamar/create/{lowongan}', [PelamarController::class, 'create'])->name('user.pelamars.create');
     Route::post('/pelamar/store', [PelamarController::class, 'store'])->name('user.pelamars.store');
     Route::post('/user/tasks/{id}/upload', [UserPageController::class, 'uploadTaskFile'])->name('user.tasks.upload');
-     Route::post('/logout', [AuthContoller::class, 'logout'])->name('logout');
 });
+Route::post('/logout', [AuthContoller::class, 'logout'])->middleware('auth')->name('logout');

@@ -52,6 +52,7 @@ class UserController extends Controller
             'phone' => $validated['phone'],
             'address' => $validated['address'],
             'role_id' => $validated['role_id'],
+            'email_verified_at' => now(),
         ]);
 
         // Redirect ke halaman daftar user dengan pesan sukses

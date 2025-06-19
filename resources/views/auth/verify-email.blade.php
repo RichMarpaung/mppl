@@ -20,6 +20,14 @@
                             </div>
                         </form>
                         <p class="text-center mt-3">If you did not create an account, no further action is required.</p>
+                        <form action="{{ route('logout') }}" method="POST" >
+    @csrf
+    <div class="text-center">
+    <button type="submit" class="btn btn-danger">
+        <iconify-icon icon="mdi:logout"></iconify-icon> Logout
+    </button>
+    </div>
+</form>
                     </div>
                 </div>
             </div>

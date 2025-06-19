@@ -50,7 +50,7 @@ class AuthContoller extends Controller
             if(Auth::user()->role_id == 1){
                 return redirect()->intended('/admin');
             }
-            return redirect()->intended('/home');
+            return redirect()->intended('/profile');
         }
         return back()->withErrors([
             'email' => 'Email or password is incorrect',
