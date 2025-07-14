@@ -86,7 +86,8 @@
                     <li><a href="{{ route('dashboard.page') }}#portofolio">Portofolio</a></li>
                     <li><a href="{{ route('dashboard.page') }}#lowongan">Karir</a></li>
                     <li><a href="{{ route('dashboard.page') }}#layanan">Layanan</a></li>
-                    <li><a href="{{ route('news.user.index') }}" class="{{ request()->is('news') ? 'active' : '' }}">Berita</a></li>
+                    <li><a href="{{ route('news.user.index') }}"
+                            class="{{ request()->is('news') ? 'active' : '' }}">Berita</a></li>
 
                     {{-- <li class="dropdown"><a href="#"><span>Lainnya</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -112,9 +113,12 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            {{-- <a class="btn-getstarted" href="{{ auth()->check() ? '/profile' : route('login') }}">
-                {{ auth()->check() ? 'Profile' : 'Login' }}
-            </a> --}}
+            <a class="btn-getstarted"
+                @if (auth()->check()) href="/profile"
+   @else
+       style="display:none" @endif>
+                Profile
+            </a>
         </div>
     </header>
 
