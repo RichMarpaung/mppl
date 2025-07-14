@@ -14,4 +14,8 @@ class Lowongan extends Model
     {
         return $this->hasMany(Pelamar::class);
     }
+    public function jadwalTahaps()
+    {
+        return $this->hasMany(JadwalTahap::class);
+    }
 }

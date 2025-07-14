@@ -6,6 +6,7 @@ use App\Http\Controllers\LowonganController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PelamarController;
+use App\Http\Controllers\PelamarProcessController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TaskController;
@@ -23,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/news', [NewsController::class, 'userIndex'])->name('news.user.index');
 Route::get('/', [UserPageController::class, 'dashboard'])->name('dashboard.page');
+Route::get('/about', [UserPageController::class, 'about'])->name('about.page');
+Route::get('/cv', function () {
+        return view('cv');
+    })->name('cv');
 
 Route::post('/logout', [AuthContoller::class, 'logout'])->name('logout');
 Route::middleware('guest')->group(function () {
@@ -86,6 +91,21 @@ Route::middleware(['auth', MustAdmin::class])->prefix('admin')->name('admin.')->
     Route::put('/profile', [UserPageController::class, 'updateProfile'])->name('profile.update');
     Route::put('/profile/photo', [UserPageController::class, 'updatePhoto'])->name('profile.updatePhoto');
     Route::put('/profile/password', [UserPageController::class, 'updatePassword'])->name('profile.updatePassword');
+
+
+     Route::post('/pelamar/{pelamar}/approve-berkas',
+        [PelamarProcessController::class, 'approveBerkas']
+    )->name('pelamar.approve-berkas');
+
+    // Lulus tahap
+    Route::post('/pelamar/{pelamar}/tahap/{tahap}/lulus',
+        [PelamarProcessController::class, 'lulus']
+    )->name('pelamar.tahap.lulus');
+
+    // Gagal tahap
+    Route::post('/pelamar/{pelamar}/tahap/{tahap}/gagal',
+        [PelamarProcessController::class, 'gagal']
+    )->name('pelamar.tahap.gagal');
 });
 // end admin routes
 
@@ -102,3 +122,4 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/user/tasks/{id}/upload', [UserPageController::class, 'uploadTaskFile'])->name('user.tasks.upload');
 });
 Route::post('/logout', [AuthContoller::class, 'logout'])->middleware('auth')->name('logout');
+

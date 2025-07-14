@@ -76,7 +76,7 @@
                     <li class="dropdown"><a href="#"><span>Tentang Kami</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="{{ route('dashboard.page') }}#about">Tentang Kami</a></li>
+                            <li><a href="{{ route('about.page') }}#about">Tentang Kami</a></li>
                             <li><a href="{{ route('dashboard.page') }}#sejarah">Sejarah</a></li>
                             <li><a href="{{ route('dashboard.page') }}#visi">Visi Misi</a></li>
                             <li><a href="{{ route('dashboard.page') }}#team">Tim</a></li>
@@ -84,7 +84,7 @@
                     </li>
                     {{-- <li><a href="/#portfolio">Portfolio</a></li> --}}
                     <li><a href="{{ route('dashboard.page') }}#portofolio">Portofolio</a></li>
-                    <li><a href="{{ route('dashboard.page') }}#lowongan">Lowongan</a></li>
+                    <li><a href="{{ route('dashboard.page') }}#lowongan">Karir</a></li>
                     <li><a href="{{ route('dashboard.page') }}#layanan">Layanan</a></li>
                     <li><a href="{{ route('news.user.index') }}" class="{{ request()->is('news') ? 'active' : '' }}">Berita</a></li>
 
@@ -112,9 +112,9 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="{{ auth()->check() ? '/profile' : route('login') }}">
+            {{-- <a class="btn-getstarted" href="{{ auth()->check() ? '/profile' : route('login') }}">
                 {{ auth()->check() ? 'Profile' : 'Login' }}
-            </a>
+            </a> --}}
         </div>
     </header>
 

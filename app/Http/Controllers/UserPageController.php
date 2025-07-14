@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lowongan;
+use App\Models\News;
 use App\Models\Order;
 use App\Models\Pelamar;
 use App\Models\Portofolio;
@@ -31,11 +32,16 @@ class UserPageController extends Controller
         $services = Service::all();
         $teams = Team::all();
         $lowongans = Lowongan::where('status', 'dibuka')->get();
-
-
         $portofolios = Portofolio::latest()->get();
 
-        return view('userpage.index', compact('teams', 'lowongans', 'services', 'portofolios'));
+        // Ambil 4 news terakhir
+        $news = News::latest()->take(4)->get();
+
+        return view('userpage.index', compact('teams', 'lowongans', 'services', 'portofolios', 'news'));
+    }
+    public function about()
+    {
+        return view('userpage.tentang');
     }
 
     /**

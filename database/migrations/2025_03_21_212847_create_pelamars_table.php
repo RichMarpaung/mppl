@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('tanggal_lahir');
             $table->string('alamat');
             $table->string('phone');
-
-            $table->string('cv', 255);
-            $table->enum('status', ['menunggu', 'diproses', 'diterima', 'ditolak']);
+            $table->string('cv');
+            $table->string('status')->default('menunggu')->comment('menunggu, diproses, diterima, ditolak');
+            $table->text('keterangan_penolakan')->nullable();
             $table->timestamps();
         });
     }
